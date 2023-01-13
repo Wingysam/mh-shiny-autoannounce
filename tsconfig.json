@@ -1,0 +1,9 @@
+{
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["es2021", "DOM"],
+    "module": "ES6",
+    "moduleResolution": "node"
+  }
+}

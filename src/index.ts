@@ -1,12 +1,14 @@
-require('dotenv').config()
+import * as dotenv from 'dotenv'
+import fetch from 'node-fetch'
 
-const fetch = require('node-fetch')
+import { Shinies } from './Shinies.js'
 
-const Shinies = require('./Shinies')
+dotenv.config()
+
 const shinies = new Shinies()
 
 shinies.on('shiny', async shiny => {
-  if (shiny.username !== process.env.ROBLOX_USER) return
+  if (shiny.user.username !== process.env.ROBLOX_USER) return
   fetch(process.env.WEBHOOK, {
     method: 'POST',
     headers: {
@@ -15,7 +17,7 @@ shinies.on('shiny', async shiny => {
     body: JSON.stringify({
       username: process.env.NICK,
       avatar_url: process.env.PFP,
-      content: `${process.env.PING} obtained a ${shiny.item}!`
+      content: `${process.env.PING} obtained a ${shiny.item.name}!`
     })
   })
 })
